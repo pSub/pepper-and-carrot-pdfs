@@ -16,7 +16,7 @@ function download() {
         URL="https://www.peppercarrot.com/0_sources/ep${NUMBER}_${EPISODE}/hi-res/${FILE}"
         STATUSCODE=$(curl --silent --remote-name --write-out "%{http_code}" $URL)
 
-        if [ $STATUSCODE -ne 200 ] && ! [[ $(file -b $FILE) =~ JPEG ]]; then
+        if [ $STATUSCODE -ne 200 ] || ! [[ $(file -b $FILE) =~ JPEG ]]; then
             URL="https://www.peppercarrot.com/0_sources/ep${NUMBER}_${EPISODE}/low-res/${FILE}"
             STATUSCODE=$(curl --silent --remote-name --write-out "%{http_code}" $URL)
         fi
@@ -27,7 +27,7 @@ function download() {
 
         (( i = i + 1 ))
         
-        [ $STATUSCODE -eq 200 ] && [[ $(file -b $FILE) =~ JPEG ]]
+        [ $STATUSCODE -eq 200 ]
     do :; done
 }
 
