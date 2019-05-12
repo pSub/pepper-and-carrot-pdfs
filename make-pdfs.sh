@@ -2,6 +2,12 @@
 
 OUTDIR="${0:a:h}"
 
+while getopts f o
+do	case "$o" in
+	f)	FORCE="yes";
+	esac
+done
+
 EPISODES=("${(@f)$(jq -r '.[]' episodes.json)}")
 LANGUAGES=("${(@f)$(jq -r '.[]' languages.json)}")
 
@@ -53,15 +59,20 @@ function build() {
 for ((lang = 1; lang <= $#LANGUAGES; lang++)); do
     echo "Language: ${LANGUAGES[lang]}"
     for ((ep = 1; ep <= $#EPISODES; ep++)); do
-        echo "Episode: ${EPISODES[ep]}"
+        echo -n "Episode: ${EPISODES[ep]}"
 
-        tempDir=$(mktemp -d)
-        cd $tempDir
+        if [ -z $FORCE ] && [ -f "${LANGUAGES[lang]}/episode-${(l:2::0:)ep}.pdf" ]; then
+           echo -n " exists, skipping ..."
+        else
+            tempDir=$(mktemp -d)
+            cd $tempDir
         
-        download "${EPISODES[ep]}" $ep
-        build $ep "${LANGUAGES[lang]}"
+            download "${EPISODES[ep]}" $ep
+            build $ep "${LANGUAGES[lang]}"
 
-        cd -
-        rm -rf $tempDir
+            cd -
+            rm -rf $tempDir
+        fi
+        echo
     done
 done
