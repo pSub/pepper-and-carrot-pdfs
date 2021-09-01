@@ -15,10 +15,10 @@ LANGUAGES=("${(@f)$(jq -r '.[]' languages.json)}")
 function download() {
     EPISODE=$1
     NUMBER="${(l:2::0:)2}"
-
+    LANGUAGE=$3
     i=0
     while
-        FILE="de_Pepper-and-Carrot_by-David-Revoy_E${NUMBER}P${(l:2::0:)i}.jpg"
+        FILE="${LANGUAGE}_Pepper-and-Carrot_by-David-Revoy_E${NUMBER}P${(l:2::0:)i}.jpg"
         
         URL="https://www.peppercarrot.com/0_sources/ep${NUMBER}_${EPISODE}/hi-res/${FILE}"
         STATUSCODE=$(curl --silent --remote-name --write-out "%{http_code}" $URL)
@@ -68,7 +68,7 @@ for ((lang = 1; lang <= $#LANGUAGES; lang++)); do
             tempDir=$(mktemp -d)
             cd $tempDir
         
-            download "${EPISODES[ep]}" $ep
+            download "${EPISODES[ep]}" $ep "${LANGUAGES[lang]}"
             build $ep "${LANGUAGES[lang]}"
 
             cd -
