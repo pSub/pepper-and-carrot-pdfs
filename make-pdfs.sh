@@ -1,5 +1,5 @@
 #! /usr/bin/env nix-shell
-#! nix-shell -i zsh -p jq curl imagemagick ghostscript file
+#! nix-shell -i zsh -p jq curl imagemagick ghostscript file zsh
 
 OUTDIR="${0:a:h}"
 
