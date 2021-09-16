@@ -16,6 +16,13 @@ jobs:
     - uses: cachix/install-nix-action@v13
       with:
         nix_path: nixpkgs=channel:nixos-unstable
-    - run: ./make-pdfs
-    - run: echo -e "a\n*.pdf\nq\n" | git add -i
-    - run: git commit -m "Add PDFs for new episode(s)"
+    - run: |
+        ./make-pdfs.sh
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        echo -e "a\n*.pdf\nq\n" | git add -i
+        git commit -m "Add PDFs for new episode(s)"
+    - uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        branch: ${{ github.ref }}
