@@ -69,6 +69,15 @@ for ((lang = 1; lang <= $#LANGUAGES; lang++)); do
             cd $tempDir
         
             download "${EPISODES[ep]}" $ep "${LANGUAGES[lang]}"
+
+	    set -o NULL_GLOB
+	    set -- *P00.jpg
+	    
+	    if [ "$#" -eq 0 ]; then
+		echo " doesn't exist in language ${LANGUAGES[lang]}, skipping ..."
+		break;
+	    fi
+	    
             build $ep "${LANGUAGES[lang]}"
 
             cd -
