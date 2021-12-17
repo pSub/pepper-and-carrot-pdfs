@@ -20,7 +20,7 @@ jobs:
         ./make-pdfs.sh
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
-        echo -e "a\n*.pdf\nq\n" | git add -i
+        git add *.pdf
         git commit -m "Add PDFs for new episode(s)"
     - uses: ad-m/github-push-action@master
       with:
