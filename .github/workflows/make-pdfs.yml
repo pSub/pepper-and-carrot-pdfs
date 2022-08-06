@@ -21,7 +21,7 @@ jobs:
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
         git add *.pdf
-        git commit -m "Add PDFs for new episode(s)"
+        git diff-index --quiet HEAD || git commit -m "Add PDFs for new episode(s)"
     - uses: ad-m/github-push-action@master
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
