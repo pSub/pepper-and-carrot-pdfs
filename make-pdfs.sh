@@ -75,6 +75,8 @@ for ((lang = 1; lang <= $#LANGUAGES; lang++)); do
 	    
 	    if [ "$#" -eq 0 ]; then
 		echo " doesn't exist in language ${LANGUAGES[lang]}, skipping ..."
+                cd -
+                rm -rf $tempDir
 		break;
 	    fi
 	    
