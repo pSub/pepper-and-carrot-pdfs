@@ -12,7 +12,7 @@ jobs:
   make-pdfs:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3.5.2
+    - uses: actions/checkout@v3.6.0
     - uses: cachix/install-nix-action@v22
       with:
         nix_path: nixpkgs=channel:nixos-unstable
