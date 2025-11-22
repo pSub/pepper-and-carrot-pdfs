@@ -42,10 +42,10 @@ function build() {
     NUMBER="${(l:2::0:)1}"
     LANGUAGE=$2
 
-    convert -rotate 270 -extent 1240x1753 -units PixelsPerInch  \
+    magick convert -rotate 270 -extent 1240x1753 -units PixelsPerInch  \
         -density 150x150 -gravity center *P00.jpg title-page.pdf
 
-    convert *P<1-99>.jpg -compress jpeg -resize 1240x1753 \
+    magick convert *P<1-99>.jpg -compress jpeg -resize 1240x1753 \
               -extent 1240x1753 -gravity center \
               -units PixelsPerInch -density 150x150 story.pdf
 
