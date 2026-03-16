@@ -1,3 +1,7 @@
+> [!IMPORTANT]
+> This repository has been moved from GitHub to Codeberg (https://codeberg.org/pSub/pepper-and-carrot-pdfs). 
+> The GitHub repository is archieved will no longer receive updates. Please update your bookmarks and clones accordingly.
+
 # Pepper and Carrot Comics as PDF Files
 
 This repository contains PDF files of the Pepper and Carrot comics. These comics are drawn by David Revoy and are lovely.
